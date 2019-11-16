@@ -18,9 +18,12 @@ const Mixin = {
         if (!this.isLoading) return;
       }
 
-      this.loaderTimer = setTimeout(() => {
-        this.isLoading = what;
-      }, what ? 100 : 400);
+      this.loaderTimer = setTimeout(
+        () => {
+          this.isLoading = what;
+        },
+        what ? 100 : 400
+      );
     }
   }
 };

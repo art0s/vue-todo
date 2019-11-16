@@ -26,11 +26,11 @@ h1 {
 
   &.loading {
     &:after {
-      content: ' ';
+      content: " ";
       position: absolute;
       width: 16px;
       height: 11px;
-      background-image: url('./assets/loader.gif');
+      background-image: url("./assets/loader.gif");
       bottom: -10px;
       left: 50%;
       margin-left: -8px;

@@ -7,7 +7,12 @@
       :disable="isRequesting"
       class="visible-xs"
     />
-    <Table :columns="columns" :rows="rows" :error="error" :class="isLoading ? 'loading' : false" />
+    <Table
+      :columns="columns"
+      :rows="rows"
+      :error="error"
+      :class="isLoading ? 'loading' : false"
+    />
     <Paginator
       :current="currentPage"
       :lastPage="lastPage"

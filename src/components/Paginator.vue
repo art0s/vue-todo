@@ -76,8 +76,7 @@ export default {
           for (let id in this.links) {
             this.links[id].href = null;
           }
-        }
-        else this.initLinks();
+        } else this.initLinks();
       },
       immediate: true
     }

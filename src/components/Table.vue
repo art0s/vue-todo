@@ -103,7 +103,7 @@ table {
       &:last-of-type {
         border-bottom: 1px solid #ddd;
       }
-      
+
       &:before {
         font-weight: 700;
         content: attr(aria-label);

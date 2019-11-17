@@ -16,9 +16,14 @@ const routes = [
     component: Users
   },
   {
-    path: "/",
+    path: "/user/:id",
     name: "todoList",
     component: () => import("../views/TodoList.vue")
+  },
+  {
+    path: "*",
+    name: "not-found",
+    component: () => import("../views/NotFound.vue")
   }
 ];
 

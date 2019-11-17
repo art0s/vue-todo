@@ -35,7 +35,17 @@ export default {
       error: "",
       url: "https://jsonplaceholder.typicode.com/users",
       columns: [
-        { id: "name", name: "Name", type: "string", style: "width: 30%" },
+        {
+          id: "name",
+          name: "Name",
+          type: "string",
+          style: "width: 30%",
+          link: "/user/:id",
+          onClick(store, row, next) {
+            store.dispatch("setUserData", row)
+            .then(() => next());
+          }
+        },
         { id: "email", name: "Email", type: "string" },
         { id: "phone", name: "Phone", type: "phone", style: "width: 170px" }
       ],
@@ -101,6 +111,7 @@ export default {
   watch: {
     $route: {
       handler() {
+        this.$store.dispatch("setUserData", null);
         this.getCurrentPage();
         this.getList();
       },

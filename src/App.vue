@@ -14,6 +14,14 @@
   margin: 20px auto;
   padding: 15px;
 }
+a {
+  text-decoration: none;
+  color: #0070ff;
+  transition: color 0.2s;
+  &:hover {
+    color: #0051b9;
+  }
+}
 
 h1 {
   position: relative;

@@ -27,8 +27,19 @@
             :class="`td-${col.type}`"
             :aria-label="col.name"
           >
-            <span class="cell">
+            <a
+              v-if="col.link"
+              :href="makeLink(col.link, row)"
+              @click.prevent="goTo($event, col, row)"
+              class="cell"
+            >
               {{ row[col.id] }}
+            </a>
+            <span v-else class="cell">
+              <template v-if="col.type === 'bool'">
+                <span :class="''+!!row[col.id]">{{ row[col.id] ? '&#10004;' : '&#10008;' }}</span>
+              </template>
+              <template v-else>{{ row[col.id] }}</template>
             </span>
           </td>
         </tr>
@@ -53,6 +64,23 @@ export default {
     rows: {
       required: true,
       type: [Boolean, Array]
+    }
+  },
+
+  methods: {
+    makeLink(link, row) {
+      if (!link || !row) return null;
+      let m = link.match(/^\/\w+\/:(\w+)/i);
+      if (m && m.length > 1 && m[1] && row[m[1]])
+        return link.replace(`:${m[1]}`, row[m[1]]);
+
+      return link;
+    },
+    goTo(e, col, row) {
+      let url = e.target.getAttribute("href");
+      if (!url) return;
+      if (col.onClick && typeof col.onClick === "function")
+        col.onClick(this.$store, row, () => this.$router.push(url));
     }
   }
 };
@@ -85,6 +113,15 @@ table {
     }
     &.td-phone {
       font-weight: 700;
+    }
+    &.td-bool {
+      text-align: center;
+      .true {
+        color: green;
+      }
+      .false {
+        color: red;
+      }
     }
   }
   @media (max-width: 640px) {

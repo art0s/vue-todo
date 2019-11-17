@@ -42,8 +42,7 @@ export default {
           style: "width: 30%",
           link: "/user/:id",
           onClick(store, row, next) {
-            store.dispatch("setUserData", row)
-            .then(() => next());
+            store.dispatch("setUserData", row).then(() => next());
           }
         },
         { id: "email", name: "Email", type: "string" },

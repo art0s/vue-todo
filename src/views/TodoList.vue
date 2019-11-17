@@ -4,9 +4,10 @@
     <span class="btn" @click="back">{{ backButtonTitle }}</span>
     <h3>User's information:</h3>
     <div v-for="(user, key) in $store.state.userData" :key="key">
-      <strong>{{ key }}:</strong> <template v-if="typeof user !=='object'">{{ user }}</template>
+      <strong>{{ key }}:</strong>
+      <template v-if="typeof user !== 'object'">{{ user }}</template>
       <template v-else>
-        <br>
+        <br />
         <div v-for="(info, fld) in user" :key="fld" style="padding-left: 20px">
           {{ fld }} - {{ info }}
         </div>
@@ -37,7 +38,12 @@ export default {
       urlUser: "https://jsonplaceholder.typicode.com/users",
       columns: [
         { id: "title", name: "Title", type: "string" },
-        { id: "completed", name: "Completed", type: "bool", style: "width: 70px" }
+        {
+          id: "completed",
+          name: "Completed",
+          type: "bool",
+          style: "width: 70px"
+        }
       ],
       rows: false,
       isRequesting: false,
@@ -47,10 +53,8 @@ export default {
 
   computed: {
     backButtonTitle() {
-      if (window && window.history && window.history.length > 2)
-        return "Back";
-      else
-        return "List";
+      if (window && window.history && window.history.length > 2) return "Back";
+      else return "List";
     }
   },
 
@@ -66,15 +70,19 @@ export default {
     back() {
       if (window && window.history && window.history.length > 2)
         this.$router.go(-1);
-      else
-        this.$router.push("/");
+      else this.$router.push("/");
     },
     getUser() {
       if (this.$store.state.userData) return;
       axios
         .get(`${this.urlUser}?id=${this.userId}`)
         .then(answer => {
-          if (answer && answer.status === 200 && answer.data && answer.data.length)
+          if (
+            answer &&
+            answer.status === 200 &&
+            answer.data &&
+            answer.data.length
+          )
             this.$store.dispatch("setUserData", answer.data[0]);
         })
         .catch(() => {});
@@ -87,7 +95,12 @@ export default {
       axios
         .get(`${this.url}?userId=${this.userId}`)
         .then(answer => {
-          if (answer && answer.status === 200 && answer.data && answer.data.length)
+          if (
+            answer &&
+            answer.status === 200 &&
+            answer.data &&
+            answer.data.length
+          )
             this.rows = answer.data.slice();
           else this.rows = [];
         })

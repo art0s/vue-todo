@@ -37,7 +37,9 @@
             </a>
             <span v-else class="cell">
               <template v-if="col.type === 'bool'">
-                <span :class="''+!!row[col.id]">{{ row[col.id] ? '&#10004;' : '&#10008;' }}</span>
+                <span :class="'' + !!row[col.id]">{{
+                  row[col.id] ? "&#10004;" : "&#10008;"
+                }}</span>
               </template>
               <template v-else>{{ row[col.id] }}</template>
             </span>
